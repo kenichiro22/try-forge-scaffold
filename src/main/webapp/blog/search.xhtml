@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value="#{blogBean.page}"/>
+		<f:event type="preRenderView" listener="#{blogBean.paginate}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Blog entities"/>
+
+	<ui:define name="header">
+		Blog
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Blog entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<h:panelGroup styleClass="search">
+
+				<h:panelGrid columnClasses="label,component,required" columns="3">
+					<h:outputLabel for="blogBeanSearchTitle" value="Title:"/>
+					<h:panelGroup>
+						<h:inputText id="blogBeanSearchTitle" value="#{blogBean.search.title}"/>
+						<h:message for="blogBeanSearchTitle" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+					<h:outputLabel for="blogBeanSearchContent" value="Content:"/>
+					<h:panelGroup>
+						<h:inputText id="blogBeanSearchContent" value="#{blogBean.search.content}"/>
+						<h:message for="blogBeanSearchContent" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+					<h:outputLabel for="blogBeanSearchUser" value="User:"/>
+					<h:panelGroup>
+						<h:selectOneMenu converter="#{userBean.converter}" id="blogBeanSearchUser" value="#{blogBean.search.user}">
+							<f:selectItem/>
+							<f:selectItems value="#{userBean.all}"/>
+						</h:selectOneMenu>
+						<h:message for="blogBeanSearchUser" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+				</h:panelGrid>
+				<h:panelGroup styleClass="buttons">
+					<h:commandLink value="Search" action="#{blogBean.search}"/>
+					<h:commandLink value="Create New" action="#{blogBean.create}"/>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:dataTable id="blogBeanPageItems" styleClass="data-table" value="#{blogBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Title"/>
+					</f:facet>
+					<h:link outcome="/blog/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemTitle" value="#{_item.title}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Content"/>
+					</f:facet>
+					<h:link outcome="/blog/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemContent" value="#{_item.content}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Created At"/>
+					</f:facet>
+					<h:link outcome="/blog/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemCreatedAt" value="#{_item.createdAt}">
+							<f:convertDateTime type="both"/>
+						</h:outputText>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="User"/>
+					</f:facet>
+					<h:link outcome="/blog/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemUser" value="#{_item.user}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value="#{blogBean}"/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

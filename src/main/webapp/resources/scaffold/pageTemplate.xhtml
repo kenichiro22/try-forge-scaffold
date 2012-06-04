@@ -17,7 +17,17 @@
 				<h:link id="homeLink" outcome="/index.xhtml">
 					<img src="#{resource['forge-logo.png']}" alt="Forge... get hammered" border="0"/>
 				</h:link>
-				<ul/>				
+				<ul>
+					<li>
+						<h:link outcome="/blog/search" value="Blog"/>
+					</li>
+					<li>
+						<h:link outcome="/tag/search" value="Tag"/>
+					</li>
+					<li>
+						<h:link outcome="/user/search" value="User"/>
+					</li>
+				</ul>				
 			</div>
 		
 			<div id="content">
