@@ -11,4 +11,5 @@
 </forge>
 </jboss>
 </org>
+<rootpath>/rest</rootpath>
 </configuration>
