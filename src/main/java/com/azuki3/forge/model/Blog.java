@@ -17,7 +17,11 @@ import java.util.Set;
 import java.util.HashSet;
 import com.azuki3.forge.model.Tag;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+@XmlRootElement
 @Entity
 public class Blog implements java.io.Serializable
 {
@@ -82,8 +86,10 @@ public class Blog implements java.io.Serializable
       return super.hashCode();
    }
 
+   @NotNull
    @Column
-   private String title;
+   private @Size(min = 1, max = 256)
+   String title;
 
    public String getTitle()
    {
@@ -95,8 +101,10 @@ public class Blog implements java.io.Serializable
       this.title = title;
    }
 
+   @NotNull
    @Column
-   private String content;
+   private @Size(min = 1, max = 256)
+   String content;
 
    public String getContent()
    {
@@ -131,6 +139,7 @@ public class Blog implements java.io.Serializable
       return result;
    }
 
+   @NotNull
    @ManyToOne
    private User user;
 

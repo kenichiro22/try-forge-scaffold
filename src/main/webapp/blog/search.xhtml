@@ -30,20 +30,19 @@
 				<h:panelGrid columnClasses="label,component,required" columns="3">
 					<h:outputLabel for="blogBeanSearchTitle" value="Title:"/>
 					<h:panelGroup>
-						<h:inputText id="blogBeanSearchTitle" value="#{blogBean.search.title}"/>
+						<h:inputText id="blogBeanSearchTitle" maxLength="256" value="#{blogBean.search.title}"/>
 						<h:message for="blogBeanSearchTitle" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="blogBeanSearchContent" value="Content:"/>
 					<h:panelGroup>
-						<h:inputText id="blogBeanSearchContent" value="#{blogBean.search.content}"/>
+						<h:inputText id="blogBeanSearchContent" maxLength="256" value="#{blogBean.search.content}"/>
 						<h:message for="blogBeanSearchContent" styleClass="error"/>
 					</h:panelGroup>
 					<h:outputText/>
 					<h:outputLabel for="blogBeanSearchUser" value="User:"/>
 					<h:panelGroup>
 						<h:selectOneMenu converter="#{userBean.converter}" id="blogBeanSearchUser" value="#{blogBean.search.user}">
-							<f:selectItem/>
 							<f:selectItems value="#{userBean.all}"/>
 						</h:selectOneMenu>
 						<h:message for="blogBeanSearchUser" styleClass="error"/>
@@ -73,17 +72,6 @@
 					<h:link outcome="/blog/view">
 						<f:param name="id" value="#{_item.id}"/>
 						<h:outputText id="itemContent" value="#{_item.content}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Created At"/>
-					</f:facet>
-					<h:link outcome="/blog/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemCreatedAt" value="#{_item.createdAt}">
-							<f:convertDateTime type="both"/>
-						</h:outputText>
 					</h:link>
 				</h:column>
 				<h:column>

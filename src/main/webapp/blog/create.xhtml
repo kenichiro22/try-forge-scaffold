@@ -39,16 +39,16 @@
 			<h:panelGrid columnClasses="label,component,required" columns="3">
 				<h:outputLabel for="blogBeanBlogTitle" value="Title:"/>
 				<h:panelGroup>
-					<h:inputText id="blogBeanBlogTitle" value="#{blogBean.blog.title}"/>
+					<h:inputText id="blogBeanBlogTitle" maxLength="256" required="true" value="#{blogBean.blog.title}"/>
 					<h:message for="blogBeanBlogTitle" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 				<h:outputLabel for="blogBeanBlogContent" value="Content:"/>
 				<h:panelGroup>
-					<h:inputText id="blogBeanBlogContent" value="#{blogBean.blog.content}"/>
+					<h:inputText id="blogBeanBlogContent" maxLength="256" required="true" value="#{blogBean.blog.content}"/>
 					<h:message for="blogBeanBlogContent" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 				<h:outputLabel for="blogBeanBlogCreatedAt" value="Created At:"/>
 				<h:panelGroup>
 					<h:inputText id="blogBeanBlogCreatedAt" value="#{blogBean.blog.createdAt}">
@@ -59,13 +59,12 @@
 				<h:outputText/>
 				<h:outputLabel for="blogBeanBlogUser" value="User:"/>
 				<h:panelGroup>
-					<h:selectOneMenu converter="#{userBean.converter}" id="blogBeanBlogUser" value="#{blogBean.blog.user}">
-						<f:selectItem/>
+					<h:selectOneMenu converter="#{userBean.converter}" id="blogBeanBlogUser" required="true" value="#{blogBean.blog.user}">
 						<f:selectItems value="#{userBean.all}"/>
 					</h:selectOneMenu>
 					<h:message for="blogBeanBlogUser" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 				<h:outputLabel for="blogBeanBlogTags" value="Tags:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{blogBean.blog.tags}"/>
